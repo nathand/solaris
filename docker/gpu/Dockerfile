@@ -8,12 +8,12 @@ ARG solaris_branch='school'
 
 
 # prep apt-get and cudnn
-RUN apt-get update && apt-get install -y --no-install-recommends \
-	    apt-utils \
-            libcudnn7=$CUDNN_VERSION-1+cuda9.0 \
-            libcudnn7-dev=$CUDNN_VERSION-1+cuda9.0 && \
-    apt-mark hold libcudnn7 && \
-    rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+# 	    apt-utils \
+#             libcudnn7=$CUDNN_VERSION-1+cuda9.0 \
+#             libcudnn7-dev=$CUDNN_VERSION-1+cuda9.0 && \
+#     apt-mark hold libcudnn7 && \
+#     rm -rf /var/lib/apt/lists/*
 
 # install requirements
 RUN apt-get update \
@@ -57,7 +57,8 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.4-Linux-x86_
 # prepend pytorch and conda-forge before default channel
 RUN conda update conda && \
     conda config --prepend channels conda-forge && \
-    conda config --prepend channels pytorch
+    conda config --prepend channels pytorch &&\
+    conda install mamba -c conda-forge --yes
 
 # get dev version of solaris and create conda environment based on its env file
 WORKDIR /tmp/
@@ -66,7 +67,7 @@ RUN git clone https://github.com/nathand/solaris.git && \
     cd solaris && \
     git checkout ${solaris_branch} && \
     ./installTensorFlow.sh &&\
-    conda env create -f environment-gpu.yml
+    mamba env create -file environment-gpu.yml
 ENV PATH /opt/conda/envs/solaris/bin:$PATH
 
 RUN cd solaris && pip install .
@@ -85,3 +86,4 @@ RUN source activate solaris && python -m ipykernel.kernelspec \
 EXPOSE 8888 6006
 
 RUN ["/bin/bash"]
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
