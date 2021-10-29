@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.13.1-gpu
+FROM tensorflow/tensorflow:1.13.1-gpu-py3
 #FROM nvidia/cuda:9.2-devel-ubuntu16.04
 LABEL maintainer="nweir <nweir@iqt.org>"
 
