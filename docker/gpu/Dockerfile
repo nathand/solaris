@@ -67,7 +67,7 @@ RUN git clone https://github.com/nathand/solaris.git && \
     cd solaris && \
     git checkout ${solaris_branch} && \
     ./installTensorFlow.sh &&\
-    mamba env create -file environment-gpu.yml
+    mamba env create --file environment-gpu.yml
 ENV PATH /opt/conda/envs/solaris/bin:$PATH
 
 RUN cd solaris && pip install .
