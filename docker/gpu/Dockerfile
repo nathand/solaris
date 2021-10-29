@@ -1,4 +1,5 @@
-FROM nvidia/cuda:9.2-devel-ubuntu16.04
+FROM tensorflow/tensorflow:1.13.1-gpu
+#FROM nvidia/cuda:9.2-devel-ubuntu16.04
 LABEL maintainer="nweir <nweir@iqt.org>"
 
 ENV CUDNN_VERSION 7.3.0.29
