@@ -3,7 +3,7 @@ LABEL maintainer="nweir <nweir@iqt.org>"
 
 ENV CUDNN_VERSION 7.3.0.29
 LABEL com.nvidia.cudnn.version="${CUDNN_VERSION}"
-ARG solaris_branch='master'
+ARG solaris_branch='school'
 
 
 # prep apt-get and cudnn
@@ -60,9 +60,11 @@ RUN conda update conda && \
 
 # get dev version of solaris and create conda environment based on its env file
 WORKDIR /tmp/
-RUN git clone https://github.com/cosmiq/solaris.git && \
+
+RUN git clone https://github.com/nathand/solaris.git && \
     cd solaris && \
     git checkout ${solaris_branch} && \
+    ./installTensorFlow.sh &&\
     conda env create -f environment-gpu.yml
 ENV PATH /opt/conda/envs/solaris/bin:$PATH
 
