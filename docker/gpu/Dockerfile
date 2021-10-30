@@ -87,4 +87,4 @@ RUN source activate solaris && python -m ipykernel.kernelspec \
 EXPOSE 8888 6006
 
 RUN ["/bin/bash"]
-CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+# CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
