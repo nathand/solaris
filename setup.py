@@ -82,7 +82,7 @@ else:
                  'torchvision>=0.5.0',
                  'tqdm>=4.40.0',
                  'urllib3>=1.25.7',
-                 'tensorflow==1.13.2'
+                 #'tensorflow==1.13.2'
                  ]
 
 
