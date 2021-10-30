@@ -70,7 +70,7 @@ class Trainer(object):
             self.model = reset_weights(self.model, self.framework)
 
         if self.framework == 'keras':
-            self.model = self.model.compile(optimizer=self.optimizer,
+            model = self.model.compile(optimizer=self.optimizer,
                                             loss=self.loss,
                                             metrics=self.metrics['train'])
 
