@@ -25,6 +25,7 @@ BZ_V='0.19.2'
 
 # pip install /tmp/tensorflow_pkg/tensorflow-version-tags.whl
 
-
+TF_PATH='/usr/local/lib/python3.6/dist-packages/tensorflow/python'
+cp tensorflow_overrides/optimizers.py $TF_PATH/keras/optimizers.py
 
 echo 'Installing TensorFlow complete'
