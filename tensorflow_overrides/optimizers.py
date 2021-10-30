@@ -856,9 +856,9 @@ def get(identifier):
   Raises:
       ValueError: If `identifier` cannot be interpreted.
   """
-  if identifier != None:
-      return identifier
-  elif isinstance(identifier, (Optimizer, optimizer_v2.OptimizerV2)):
+  # if identifier != None:
+  #     return identifier
+  if isinstance(identifier, (Optimizer, optimizer_v2.OptimizerV2)):
     return identifier
   # Wrap TF optimizer instances
   elif isinstance(identifier, tf_optimizer_module.Optimizer):

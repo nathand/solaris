@@ -40,6 +40,15 @@ class Trainer(object):
         self.epochs = self.config['training']['epochs']
         self.optimizer = get_optimizer(self.framework, self.config)
         self.lr = self.config['training']['lr']
+        if self.config['training']['opt_args'] is not None:
+            self.optimizer = self.optimizer(
+                self.model.parameters(), lr=self.lr,
+                **self.config['training']['opt_args']
+            )
+        else:
+            self.optimizer = self.optimizer(
+                self.model.parameters(), lr=self.lr
+            )
         self.custom_losses = custom_losses
         self.loss = get_loss(self.framework,
                              self.config['training'].get('loss'),
@@ -79,16 +88,16 @@ class Trainer(object):
                 self.model = self.model.cuda()
                 if self.gpu_count > 1:
                     self.model = torch.nn.DataParallel(self.model)
-            # create optimizer
-            if self.config['training']['opt_args'] is not None:
-                self.optimizer = self.optimizer(
-                    self.model.parameters(), lr=self.lr,
-                    **self.config['training']['opt_args']
-                )
-            else:
-                self.optimizer = self.optimizer(
-                    self.model.parameters(), lr=self.lr
-                )
+            # # create optimizer
+            # if self.config['training']['opt_args'] is not None:
+            #     self.optimizer = self.optimizer(
+            #         self.model.parameters(), lr=self.lr,
+            #         **self.config['training']['opt_args']
+            #     )
+            # else:
+            #     self.optimizer = self.optimizer(
+            #         self.model.parameters(), lr=self.lr
+            #     )
             # wrap in lr_scheduler if one was created
             for cb in self.callbacks:
                 if isinstance(cb, _LRScheduler):
