@@ -71,7 +71,8 @@ class Trainer(object):
 
         if self.framework == 'keras':
             if self.config['training']['opt_args'] is not None:
-                self.optimizer = self.optimizer(**self.config['training']['opt_args'])
+                self.optimizer = self.optimizer(lr=self.lr,
+                )
             model = self.model.compile(optimizer=self.optimizer,
                                             loss=self.loss,
                                             metrics=self.metrics['train'])
