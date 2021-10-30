@@ -78,7 +78,7 @@ else:
                  'rtree>=0.9.3',
                  'scikit-image>=0.16.2',
                  'scipy>=1.3.2',
-                 'shapely>=1.7.1dev',
+                 'shapely>=1.7.1',
                  'torchvision>=0.5.0',
                  'tqdm>=4.40.0',
                  'urllib3>=1.25.7',
