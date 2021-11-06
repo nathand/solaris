@@ -74,8 +74,7 @@ class Inferer(object):
             temp_im = gdal.Open(im_path)
             proj = temp_im.GetProjection()
             gt = temp_im.GetGeoTransform()
-            inf_input, idx_refs, (
-                src_im_height, src_im_width) = inf_tiler(im_path)
+            inf_input, idx_refs, (src_im_height, src_im_width) = inf_tiler(im_path)
 
             if self.framework == 'keras':
                 subarr_preds = self.model.predict(inf_input,

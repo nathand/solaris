@@ -30,12 +30,12 @@ def get_model(model_name, framework, model_path=None, pretrained=False,
 
     if model is not None and pretrained:
         try:
-            model = _load_model_weights(model, model_path, framework)
+            _load_model_weights(model, model_path, framework)
         except (OSError, FileNotFoundError):
             warn(f'The model weights file {model_path} was not found.'
                  ' Attempting to download from the SpaceNet repository.')
             weight_path = _download_weights(md)
-            model = _load_model_weights(model, weight_path, framework)
+            _load_model_weights(model, weight_path, framework)
 
     return model
 
